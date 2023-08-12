@@ -15,8 +15,8 @@ export const tools = {
         value: "medium",
       },
       {
-        label: "Big",
-        value: "big",
+        label: "Large",
+        value: "large",
       },
       {
         label: "Greater than 2mp",
@@ -68,6 +68,10 @@ export const tools = {
         value: null
       },
       {
+        label: "Square",
+        value: "square"
+      },
+      {
         label: "Portrait",
         value: "portrait"
       },
@@ -76,8 +80,8 @@ export const tools = {
         value: "landscape"
       },
       {
-        label: "Square",
-        value: "square"
+        label: "Ultrawide",
+        value: "ultrawide"
       }
     ]
   },
@@ -85,11 +89,11 @@ export const tools = {
     title: "color",
     values: [
       {
-        label: "Cualquier color",
+        label: "Any color",
         value: null
       },
       {
-        label: "Blanco y negro",
+        label: "Black & white",
         value: "bn"
       },
       {
@@ -186,4 +190,13 @@ export const tools = {
 
     ]
   }
+}
+
+export const selectionDefaults = {
+  size: null,
+  aspect: null,
+  color: null,
+  type: null,
+  filetype: null,
+  rights: null,
 }

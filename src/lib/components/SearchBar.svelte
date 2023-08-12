@@ -1,33 +1,46 @@
 <script>
 	import { params } from '$lib/searchparams';
 	import { User } from '$lib/stores';
+	import { selectionDefaults } from '$lib/tools';
 
 	import Search from '$lib/icons/Search.svelte';
 	import Ajust from '$lib/icons/Ajust.svelte';
+	import Clean from '$lib/icons/Clean.svelte';
 
 	const BASE_URL = 'https://www.google.com/search';
 
 	let term;
 	let rows = 1;
 
-	async function search(e) {
+	function search(e) {
 		if (e.key !== 'Enter') return;
 		else e.preventDefault();
 
+		const { currentSelection } = $User;
 		const url = new URL(BASE_URL);
 
 		url.searchParams.append('q', term);
 		url.searchParams.append(...params.images);
 
-		/* for (let key in $User.currentSelection) {
-			let value = $User.currentSelection[key];
-			if (!value) return;
+		let query = [];
 
-			url.searchParams.append(...params[key][value]);
-		} */
+		for (let key in currentSelection) {
+			let value = currentSelection[key];
+			if (!value) continue;
 
-		console.log(url);
-		/* window.open(url, '_blank'); */
+			query.push(params[key][value]);
+		}
+
+		url.searchParams.append(params.searchBy, query.toString());
+		window.open(url, '_blank');
+	}
+
+	function cleanAll() {
+		$User.currentSelection = selectionDefaults;
+	}
+
+	function togTools() {
+		$User.hideTools = !$User.hideTools;
 	}
 </script>
 
@@ -46,13 +59,31 @@
 		autocomplete="off"
 		autocorrect="off"
 		spellcheck="false"
-		title="Buscar"
+		title="Search"
 		autofocus
 		bind:value={term}
 		on:keydown={(e) => search(e)}
 	/>
 
-	<span class="row fcenter" on:click={search}>
+	<span
+		tabindex="0"
+		role="button"
+		class="row fcenter"
+		title="Clean all"
+		on:click={cleanAll}
+		on:keydown={(e) => e.key === 'Enter' && cleanAll()}
+	>
+		<Clean />
+	</span>
+
+	<span
+		tabindex="0"
+		role="button"
+		class="row fcenter"
+		title="Toggle tools"
+		on:click={togTools}
+		on:keydown={(e) => e.key === 'Enter' && togTools()}
+	>
 		<Ajust />
 	</span>
 </label>
@@ -62,9 +93,19 @@
 		max-width: 600px;
 		background-color: var(--base-900);
 		border-radius: 1em;
+		padding: 0.25em;
 	}
 
 	span {
-		padding: 1em;
+		padding: 0.75em;
+
+		&:not(:first-of-type) {
+			cursor: pointer;
+
+			&:focus {
+				background-color: var(--base-800);
+				border-radius: 0.75em;
+			}
+		}
 	}
 </style>

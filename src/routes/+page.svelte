@@ -18,6 +18,6 @@
 <style lang="postcss">
 	section {
 		gap: 2em;
-		margin-top: 15%;
+		margin-top: 10%;
 	}
 </style>

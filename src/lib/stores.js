@@ -1,15 +1,10 @@
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
+import { selectionDefaults } from '$lib/tools';
 
-const userDefaults = {
-  currentSelection: {
-    size: null,
-    aspect: null,
-    color: null,
-    type: null,
-    filetype: null,
-    rights: null
-  },
+export const userDefaults = {
+  currentSelection: selectionDefaults,
+  hideTools: false,
   lastSearch: []
 }
 

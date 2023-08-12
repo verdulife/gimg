@@ -15,16 +15,17 @@
 	}
 </script>
 
-<button class="col" on:click={togDropdown}>
+<button tabindex="0" class="col" on:click={togDropdown}>
 	<ul class="col wfull">
 		{#if isOpen}
 			{#each values as option}
 				<li
 					tabindex="0"
 					role="option"
+					class="wfull tleft"
 					aria-selected={selection === option.value}
-					on:click={(e) => selectOption(option)}
-					on:keydown={(e) => selectOption(option)}
+					on:click={() => selectOption(option)}
+					on:keydown={() => selectOption(option)}
 				>
 					{option.label}
 				</li>
@@ -36,12 +37,17 @@
 </button>
 
 <style lang="postcss">
-	ul {
-		gap: 0.75em;
+	button:focus {
+		background-color: var(--base-900);
 	}
 
-	li:focus {
-		text-decoration: underline;
+	li {
+		padding: 0.5em 1em;
+
+		&:focus {
+			background-color: var(--base-900);
+			border-radius: 0.25em;
+		}
 	}
 
 	h6 {
