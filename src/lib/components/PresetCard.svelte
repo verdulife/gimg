@@ -1,10 +1,10 @@
 <script>
-	import { User } from '$lib/stores';
+	import { Selection } from '$lib/stores';
 
 	export let data;
 
 	function applyPresets() {
-		$User.currentSelection = data.presets;
+		$Selection = data.presets;
 	}
 </script>
 

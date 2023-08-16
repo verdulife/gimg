@@ -193,10 +193,10 @@ export const tools = {
 }
 
 export const selectionDefaults = {
-  size: null,
-  aspect: null,
-  color: null,
-  type: null,
-  filetype: null,
-  rights: null,
+  size: tools.size.values[0],
+  aspect: tools.aspect.values[0],
+  color: tools.color.values[0],
+  type: tools.type.values[0],
+  filetype: tools.filetype.values[0],
+  rights: tools.rights.values[0],
 }

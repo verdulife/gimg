@@ -1,6 +1,6 @@
 <script>
 	import { params } from '$lib/searchparams';
-	import { User } from '$lib/stores';
+	import { User, Selection } from '$lib/stores';
 	import { selectionDefaults } from '$lib/tools';
 
 	import Search from '$lib/icons/Search.svelte';
@@ -9,14 +9,13 @@
 
 	const BASE_URL = 'https://www.google.com/search';
 
-	let term;
+	let inputElement, term;
 	let rows = 1;
 
 	function search(e) {
 		if (e.key !== 'Enter') return;
 		else e.preventDefault();
 
-		const { currentSelection } = $User;
 		const url = new URL(BASE_URL);
 
 		url.searchParams.append('q', term);
@@ -24,8 +23,8 @@
 
 		let query = [];
 
-		for (let key in currentSelection) {
-			let value = currentSelection[key];
+		for (let key in $Selection) {
+			let value = $Selection[key].value;
 			if (!value) continue;
 
 			query.push(params[key][value]);
@@ -36,12 +35,18 @@
 	}
 
 	function cleanAll() {
-		$User.currentSelection = selectionDefaults;
+		$Selection = selectionDefaults;
 	}
 
 	function togTools() {
 		$User.hideTools = !$User.hideTools;
 	}
+
+	function autoFocus() {
+		inputElement.focus();
+	}
+
+	$: $User || $Selection, inputElement && autoFocus();
 </script>
 
 <label class="row acenter wfull" for="search">
@@ -60,7 +65,7 @@
 		autocorrect="off"
 		spellcheck="false"
 		title="Search"
-		autofocus
+		bind:this={inputElement}
 		bind:value={term}
 		on:keydown={(e) => search(e)}
 	/>

@@ -4,26 +4,25 @@
 
 	let { title, values } = data;
 
-	$: titleLabel =
-		values.forEach((option) => {
-			if (option.value === selection) return option.value;
-		}) || title;
+	$: label = title;
 
-	function selectOption({ label, value }) {
-		selection = value;
-		titleLabel = label;
+	function selectOption(option) {
+		selection = option;
 	}
+
+	$: selection, (label = selection.value === null ? title : selection.label);
+	$: console.log(selection);
 </script>
 
 <button tabindex="0" class="col">
-	<h6>{titleLabel}</h6>
+	<h6>{label}</h6>
 	<ul class="scrollbar">
 		{#each values as option}
 			<li
 				tabindex="0"
 				role="option"
 				class="wfull tleft"
-				aria-selected={selection === option.value}
+				aria-selected={selection === option}
 				on:click={() => selectOption(option)}
 				on:keydown={() => selectOption(option)}
 			>
@@ -71,6 +70,7 @@
 	}
 
 	h6 {
+		font-weight: bold;
 		text-transform: capitalize;
 	}
 </style>
