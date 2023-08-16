@@ -30,7 +30,7 @@
 				size: '2mp',
 				aspect: null,
 				color: null,
-				type: 'photography',
+				type: 'photo',
 				filetype: null,
 				rights: null
 			}

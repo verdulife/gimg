@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "gImg™",
+  title: "Images++",
   description: "Un pantalón práctico de carácter minimalista, ideal para aquellas personas que aprecian sentirse cómodos y que les gusta moverse sin limitaciones.",
   keywords: "pantalón, movimiento, libertad, calidad, comodidad, yoga, artes marciales, tecnologia, ecológico",
   url: "https://www.gimg.com/",

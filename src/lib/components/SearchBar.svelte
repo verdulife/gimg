@@ -1,7 +1,6 @@
 <script>
 	import { params } from '$lib/searchparams';
 	import { User, Selection } from '$lib/stores';
-	import { selectionDefaults } from '$lib/tools';
 
 	import Search from '$lib/icons/Search.svelte';
 	import Ajust from '$lib/icons/Ajust.svelte';
@@ -24,7 +23,7 @@
 		let query = [];
 
 		for (let key in $Selection) {
-			let value = $Selection[key].value;
+			let value = $Selection[key];
 			if (!value) continue;
 
 			query.push(params[key][value]);
@@ -35,7 +34,14 @@
 	}
 
 	function cleanAll() {
-		$Selection = selectionDefaults;
+		$Selection = {
+			size: null,
+			aspect: null,
+			color: null,
+			type: null,
+			filetype: null,
+			rights: null
+		};
 	}
 
 	function togTools() {

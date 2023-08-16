@@ -1,17 +1,26 @@
 <script>
-	export let data;
-	export let selection;
+	import { tools } from '$lib/tools';
+	import { Selection } from '$lib/stores';
 
-	let { title, values } = data;
+	export let data;
+
+	const [key, value] = data;
+	const { title, values } = value;
 
 	$: label = title;
 
 	function selectOption(option) {
-		selection = option;
+		$Selection[key] = option.value;
 	}
 
-	$: selection, (label = selection.value === null ? title : selection.label);
-	$: console.log(selection);
+	function getLabel(option) {
+		const match = tools[title].values.find((tool) => tool.value === option);
+		return match.label;
+	}
+
+	$: console.log($Selection);
+
+	$: $Selection[key], (label = $Selection[key] === null ? title : getLabel($Selection[key]));
 </script>
 
 <button tabindex="0" class="col">
@@ -22,7 +31,7 @@
 				tabindex="0"
 				role="option"
 				class="wfull tleft"
-				aria-selected={selection === option}
+				aria-selected={$Selection[key] === option.value}
 				on:click={() => selectOption(option)}
 				on:keydown={() => selectOption(option)}
 			>
