@@ -4,8 +4,7 @@ import { selectionDefaults } from '$lib/tools';
 
 export const userDefaults = {
   currentSelection: selectionDefaults,
-  hideTools: false,
-  lastSearch: []
+  hideTools: false
 }
 
 export const User = writable((browser && JSON.parse(localStorage.getItem("User"))) || userDefaults);

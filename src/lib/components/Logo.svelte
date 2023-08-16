@@ -1,8 +1,8 @@
-<h1>gImage</h1>
+<h1>gImages</h1>
 
 <style lang="postcss">
 	h1 {
-		font-family: 'TWK Everett';
-		color: var(--base-600);
+		color: var(--base);
+		font-weight: 500;
 	}
 </style>

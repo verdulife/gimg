@@ -5,6 +5,7 @@
 	import SearchBar from '$components/SearchBar.svelte';
 	import Logo from '$components/Logo.svelte';
 	import Tools from '$components/Tools.svelte';
+	import Presets from '$components/Presets.svelte';
 </script>
 
 <Meta {data} />
@@ -13,11 +14,12 @@
 	<Logo />
 	<SearchBar />
 	<Tools />
+	<Presets />
 </section>
 
 <style lang="postcss">
 	section {
 		gap: 2em;
-		margin-top: 10%;
+		margin-top: 15%;
 	}
 </style>

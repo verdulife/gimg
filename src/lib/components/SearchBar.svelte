@@ -108,4 +108,8 @@
 			}
 		}
 	}
+
+	textarea {
+		font-family: var(--font-base);
+	}
 </style>

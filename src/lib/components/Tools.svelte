@@ -5,7 +5,7 @@
 	import Dropdown from './Dropdown.svelte';
 </script>
 
-{#if $User.hideTools}
+{#if !$User.hideTools}
 	<aside class="row">
 		{#each Object.entries(tools) as [key, value]}
 			<Dropdown data={value} bind:selection={$User.currentSelection[key]} />
