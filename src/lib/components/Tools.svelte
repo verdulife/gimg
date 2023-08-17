@@ -1,17 +1,13 @@
 <script>
 	import { tools } from '$lib/tools';
-	import { User } from '$lib/stores';
-
 	import Dropdown from './Dropdown.svelte';
 </script>
 
-{#if !$User.hideTools}
-	<aside class="row">
-		{#each Object.entries(tools) as tool}
-			<Dropdown data={tool} />
-		{/each}
-	</aside>
-{/if}
+<aside class="row">
+	{#each Object.entries(tools) as tool}
+		<Dropdown data={tool} />
+	{/each}
+</aside>
 
 <style lang="postcss">
 	aside {

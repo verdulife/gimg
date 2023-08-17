@@ -1,75 +1,40 @@
 <script>
+	import { User } from '$lib/stores';
 	import PresetCard from '$components/PresetCard.svelte';
 
-	const presetData = [
-		{
-			label: 'Vector logotype',
-			presets: {
-				size: null,
-				aspect: 'square',
-				color: null,
-				type: null,
-				filetype: 'svg',
-				rights: null
-			}
-		},
-		{
-			label: 'HD transparency',
-			presets: {
-				size: 'large',
-				aspect: null,
-				color: 'transparent',
-				type: null,
-				filetype: 'png',
-				rights: null
-			}
-		},
-		{
-			label: 'HD photography',
-			presets: {
-				size: '2mp',
-				aspect: null,
-				color: null,
-				type: 'photo',
-				filetype: null,
-				rights: null
-			}
-		},
-		{
-			label: 'Ultrawide wallpaper',
-			presets: {
-				size: '2mp',
-				aspect: 'ultrawide',
-				color: null,
-				type: null,
-				filetype: null,
-				rights: null
-			}
-		},
-		{
-			label: 'Vector icon',
-			presets: {
-				size: 'icon',
-				aspect: null,
-				color: 'transparent',
-				type: null,
-				filetype: 'svg',
-				rights: null
-			}
-		}
-	];
+	$: presetData = $User.presets;
 </script>
 
-<ul class="row wrap jcenter wfull">
-	{#each presetData as preset}
-		<PresetCard data={preset} />
-	{/each}
-</ul>
+<section class="col acenter wfull">
+	<p><small>SHIFT</small> + <small>CLICK</small> to delete a preset</p>
+
+	<ul class="row wrap jcenter wfull">
+		{#each presetData as preset}
+			<PresetCard data={preset} />
+		{/each}
+	</ul>
+</section>
 
 <style lang="postcss">
-	ul {
+	section {
 		max-width: var(--media-lg);
-		gap: 0.5em;
+		gap: 1em;
 		padding: 4em 2em;
+	}
+
+	p {
+		color: var(--base-700);
+		font-size: var(--font-xs);
+
+		& small {
+			background-color: var(--base-900);
+			font-weight: bold;
+			border-radius: 0.5em;
+			padding: 0.25em 0.5em;
+		}
+	}
+
+	ul {
+		gap: 0.5em;
 	}
 </style>

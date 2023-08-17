@@ -2,7 +2,6 @@
 
 <style lang="postcss">
 	h1 {
-		color: var(--base);
 		font-weight: 500;
 
 		& b {

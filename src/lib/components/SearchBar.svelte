@@ -34,6 +34,8 @@
 	}
 
 	function cleanAll() {
+		term = '';
+
 		$Selection = {
 			size: null,
 			aspect: null,
@@ -44,18 +46,45 @@
 		};
 	}
 
-	function togTools() {
-		$User.hideTools = !$User.hideTools;
+	function savePreset() {
+		const check = prompt('Choose a name for the new preset');
+		if (!check) return;
+
+		const newPreset = {
+			label: check,
+			presets: $Selection
+		};
+
+		$User.presets = [newPreset, ...$User.presets];
 	}
 
 	function autoFocus() {
 		inputElement.focus();
 	}
 
+	function getTextWidth(text, font) {
+		let canvas = document.createElement('canvas');
+		let context = canvas.getContext('2d');
+		context.font = font;
+		let metrics = context.measureText(text);
+		return metrics.width;
+	}
+
+	function ajustRows() {
+		const inputWidth = '375';
+		const maxLines = 6;
+
+		if (term) {
+			const amount = Math.ceil(getTextWidth(term, '16px Inter') / inputWidth);
+			rows = amount < maxLines ? amount : maxLines;
+		} else rows = 1;
+	}
+
 	$: $User || $Selection, inputElement && autoFocus();
+	$: term, ajustRows();
 </script>
 
-<label class="row acenter wfull" for="search">
+<label class="row wfull" for="search">
 	<span class="row fcenter">
 		<Search />
 	</span>
@@ -91,9 +120,9 @@
 		tabindex="0"
 		role="button"
 		class="row fcenter"
-		title="Toggle tools"
-		on:click={togTools}
-		on:keydown={(e) => e.key === 'Enter' && togTools()}
+		title="Save preset"
+		on:click={savePreset}
+		on:keydown={(e) => e.key === 'Enter' && savePreset()}
 	>
 		<Ajust />
 	</span>
@@ -105,6 +134,10 @@
 		background-color: var(--base-900);
 		border-radius: 1em;
 		padding: 0.25em;
+
+		@media (--light) {
+			background-color: var(--base-100);
+		}
 	}
 
 	span {
@@ -122,5 +155,6 @@
 
 	textarea {
 		font-family: var(--font-base);
+		padding: 0.6em 0;
 	}
 </style>

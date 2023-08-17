@@ -18,8 +18,6 @@
 		return match.label;
 	}
 
-	$: console.log($Selection);
-
 	$: $Selection[key], (label = $Selection[key] === null ? title : getLabel($Selection[key]));
 </script>
 
@@ -46,6 +44,10 @@
 		&:focus {
 			position: relative;
 			background-color: var(--base-900);
+
+			@media (--light) {
+				background-color: var(--base-100);
+			}
 		}
 
 		&:focus-within ul {
@@ -67,6 +69,12 @@
 		border-radius: 0.75em;
 		box-shadow: inset 0px 1px 2px 0px hsl(var(--base-hsl), 0.25);
 		padding: 0.5em;
+
+		@media (--light) {
+			background-color: var(--base);
+			color: var(--alt);
+			box-shadow: inset 0px 1px 2px 0px hsl(var(--alt-hsl), 0.25);
+		}
 	}
 
 	li {
@@ -75,6 +83,10 @@
 		&:focus {
 			background-color: var(--base-900);
 			border-radius: 0.5em;
+
+			@media (--light) {
+				background-color: var(--base-100);
+			}
 		}
 	}
 
